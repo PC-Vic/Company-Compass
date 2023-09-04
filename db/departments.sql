@@ -4,7 +4,7 @@ CREATE DATABASE engineering_db;
 
 USE engineering_db;
 
-CREATE TABLE engineering_employees (
+CREATE TABLE engineering_department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL,
@@ -20,7 +20,7 @@ CREATE DATABASE finance_db;
 
 USE finance_db;
 
-CREATE TABLE finance_employees (
+CREATE TABLE finance_department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL,
@@ -36,7 +36,7 @@ CREATE DATABASE legal_db;
 
 USE legal_db;
 
-CREATE TABLE legal_employees (
+CREATE TABLE legal_department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL,
@@ -52,7 +52,7 @@ CREATE DATABASE sales_db;
 
 USE sales_db;
 
-CREATE TABLE sales_employees (
+CREATE TABLE sales_sales (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(80) NOT NULL,
     last_name VARCHAR(80) NOT NULL,
