@@ -9,7 +9,7 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "mysql",
+            "name": "mysql3",
             "password": "AlexiaNieves10!!$",
             "database": "default",
             "username": "root"
