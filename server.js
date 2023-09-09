@@ -1,12 +1,5 @@
-const express = require('express');
+const inquirer = require('inquirer');
 const mysql = require('mysql2');
-
-const PORT = process.env.PORT || 3001
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 
 const db = mysql.createConnection(
@@ -14,31 +7,46 @@ const db = mysql.createConnection(
         host: 'localhost',
         user: 'root',
         password: 'AlexiaNieves10!!$',
-        database: 'employees_db' // unsure of what to put here, have multiple db
+        database: 'company_db' // unsure of what to put here, have multiple db
     },
     console.log('connected to database')
 )
 
-// Routes
-app.get('/', (req, res) => {
-    res.json({ message: ''})
-});
+function mainMenu() {
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'user_choice',
+                message: 'What would you like to view?',
+                choices: ['view departments', 'view employees', 'view managers', 'view roles',],
+            },
+        
+        ])
+        .then((answers) => {
+          console.log(answers)
+          if(answers = 'view departments') {
+            viewDepartments()
+          }
+        });
+}
 
-app.get('/employees', (req, res) => {
-    Connection.query('SELECT * from employees', (err, results) => {
+
+
+
+function viewDepartments(){
+    db.query('SELECT * from all_departments', (err, results) => {
         if (err) {
             console.error('Error fetching employee data:', err);
-            res.status(500).json({ error: 'An error occurred while fetching data'});
         } else {
-            res.json(results);
-        }
+            console.table(results)
+            mainMenu()
+        } 
     });
-});
+}
+
+// viewDepartments()
 
 
+mainMenu()
 
-
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${3001}`);
-});
