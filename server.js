@@ -7,7 +7,7 @@ const db = mysql.createConnection(
         host: 'localhost',
         user: 'root',
         password: 'AlexiaNieves10!!$',
-        database: 'company_db' // unsure of what to put here, have multiple db
+        database: 'company_db' 
     },
     console.log('connected to database')
 )
@@ -24,11 +24,11 @@ function mainMenu() {
         
         ])
         .then((answers) => {
-          console.log(answers)
-          if(answers = 'view departments') {
+        console.log(answers)
+        if(answers = 'view departments') {
             viewDepartments()
-          }
-        });
+        }
+    });
 }
 
 
