@@ -17,10 +17,17 @@ function mainMenu() {
         .prompt([
             {
                 type: 'list',
-                name: 'user_choice',
+                name: 'user_choice1',
                 message: 'What would you like to view?',
                 choices: ['view departments', 'view employees', 'view managers', 'view roles',],
             },
+            {
+                type: 'list',
+                name: 'user_choice2',
+                message: 'Please select department',
+                choices: ['engineering', 'finance', 'legal', 'sales',],
+            },
+        
         
         ])
         .then((answers) => {
@@ -29,6 +36,7 @@ function mainMenu() {
             viewDepartments()
         }
     });
+
 }
 
 
@@ -40,7 +48,7 @@ function viewDepartments(){
             console.error('Error fetching employee data:', err);
         } else {
             console.table(results)
-            mainMenu()
+          
         } 
     });
 }
