@@ -58,6 +58,17 @@ function viewDepartments() {
   });
 }
 
+function viewEmployees() {
+  db.query("SELECT * from all_employees", (err, results) => {
+    if (err) {
+      console.error("Error fetching employee data:", err);
+    } else {
+      console.table(results);
+    }
+    mainMenu();
+  });
+}
+
 // ???
 function allRoles() {
   db.query("SELECT * from all_roles", (err, results) => {
