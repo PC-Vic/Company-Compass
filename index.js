@@ -39,6 +39,10 @@ function mainMenu() {
         allRoles();
       } else if (answers.user_choice1 === "add role") {
         addRole();
+      } else if (answers.user_choice1 === "add department") {
+        addDepartment();
+      } else if (answers.user_choice1 === "add employee") {
+        addEmployee();
       }
     });
 }
@@ -102,18 +106,76 @@ function addRole() {
   
 }
 
-// function viewManagers(){
-//     db.query('SELECT * from all_employees', (err, results) => {
-//         if (err) {
-//             console.error('Error fetching employee data:', err);
-//         } else {
-//             console.table(results)
 
-//         }
-//                 mainMenu()
-//     });
-// }
+function addDepartment() {
+      inquirer.prompt([
+        {
+          name: "department_name",
+          message: "What is the name of the department?",
+          type: "input",
+        },
+      ]).then(answers => {
+        db.promise().query('INSERT INTO all_departments SET ?', answers).then(() => {
+            console.log('Role dept was added')
+            mainMenu()
+        })
+      })
+  
+}
 
-// viewDepartments()
+function addEmployee() {
+  db.promise()
+    .query("SELECT * FROM all_roles")
+    .then(([data]) => {
+      const deptChoices = data.map(({ id, title }) => ({
+        name: title,
+        value: id,
+      }));
+      inquirer.prompt([
+        {
+          name: "first_name",
+          message: "What is employee first name?",
+          type: "input",
+        },
+        {
+          name: "last_name",
+          message: "What is the employees last name?",
+          type: "input",
+        },
+        {
+          name: "title",
+          message: "what is their job title?",
+          type: "list",
+          choices: deptChoices,
+        }, 
+
+      ]).then(answers => {
+        db.promise().query("SELECT * FROM all_employees").then(([data]) => {
+          const managerChoices = data.map(({ id, first_name, last_name }) => ({
+            name: `${first_name} ${last_name}`,
+            value: id,
+          }));
+          managerChoices.unshift({name: "None", value: null})
+          inquirer.prompt([{
+            name: "manager",
+            message: 'Who is your manager?',
+            type: 'list',
+            choices: managerChoices
+          }]) .then(answers => {
+            db.promise().query('INSERT INTO all_roles SET ?', answers).then(() => {
+                console.log('Role was added')
+                mainMenu()
+            })
+          })
+      })
+     
+              
+    
+    });
+  
+})
+}
+
+
 
 mainMenu();
